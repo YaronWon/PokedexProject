@@ -1,0 +1,159 @@
+﻿@page
+@model Pokemon.Pages.PokemonByTypeModel
+@using Pokemon.Models
+@{
+
+
+ 
+}
+
+<link href="~/css/DetailStyle.css" rel="stylesheet"/>
+
+@{string Img = $"~/Images/TypeImages/{Model.TypeID}.png";}
+
+
+      <p class="text-center"> <img  src=@Url.Content(Img)  width="200" height="40" /></p>
+
+
+<table class="TypeRelationsTable">
+     <tr >
+      <td colspan="6" id="type" class="text-center Color">
+      <p id="typeName" hidden="hidden">@Model.TypeName.Substring(0,1).ToUpper()@Model.TypeName.Substring(1 , @Model.TypeName.Length - 1)</p>
+     </td>
+     </tr>
+     <tr>
+          <th class="Theader">Strong Aginst</th>
+                     <th class="Theader" >weak Aginst</th>
+                      <th class="Theader">Half Damage to</th>
+                       <th class="Theader" >Half Damage from</th>
+                        <th class="Theader">No Damage to</th>
+                         <th class="Theader" >No Damage from</th>
+     </tr>
+     <tr>
+        @{
+            string UrltoId(string url)
+            {
+             int LastSlash = url.LastIndexOf('/');
+            int nextLastSlash = url.TrimEnd('/').LastIndexOf('/');
+            string ID =  url.Substring(nextLastSlash+1 , (LastSlash-nextLastSlash) - 1);
+
+
+            return ID;
+            }
+
+                         <td id="tableTypeCol" >
+                         
+                         <p  class="Type_relation" id="S_A"> Strong Aginst </p>
+                            @foreach(Models.TypeBasicClass RazorDisplayDDT in Model.TypeDamageRelations.DoubleoDamageTo)
+                                    {
+            
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayDDT.Url) >
+                                 @RazorDisplayDDT.Name.Substring(0,1).ToUpper()@RazorDisplayDDT.Name.Substring(1 , @RazorDisplayDDT.Name.Length - 1)
+
+                                </a>
+                             
+                                    }
+                         </td>
+                         <td id="tableTypeCol">
+
+                         <p  class="Type_relation" id="W_A"> Weak Aginst </p>
+                          @foreach(BasicClass RazorDisplayDDF in Model.TypeDamageRelations.DoubleDamageFr)
+        {
+            
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayDDF.Url)>
+                             @RazorDisplayDDF.Name.Substring(0,1).ToUpper()@RazorDisplayDDF.Name.Substring(1 , @RazorDisplayDDF.Name.Length - 1)
+
+                                </a>
+                         
+        }
+                        </td>
+                        <td id="tableTypeCol">
+                        <p  class="Type_relation"> Half Damage to  </p>
+                              @foreach(BasicClass RazorDisplayHDT in Model.TypeDamageRelations.HalfDamageTo)
+        {
+            
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayHDT.Url) >
+
+                                @RazorDisplayHDT.Name.Substring(0,1).ToUpper()@RazorDisplayHDT.Name.Substring(1 , @RazorDisplayHDT.Name.Length - 1)
+
+                                </a>
+                            
+                        
+        }
+                        </td>
+                        <td id="tableTypeCol">
+                          <p class="Type_relation"> Half Damage from  </p>
+                              @foreach(BasicClass RazorDisplayHDF in Model.TypeDamageRelations.HalfDamageFr)
+        {
+            
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayHDF.Url)>
+                                 @RazorDisplayHDF.Name.Substring(0,1).ToUpper()@RazorDisplayHDF.Name.Substring(1 , @RazorDisplayHDF.Name.Length - 1)
+
+                                </a>
+                         
+        }
+                        </td>
+        
+                        <td id="tableTypeCol">
+
+                        <div class="hover-warper">
+                         <p  class="Type_relation"> No Damage to  </p>
+                               @foreach(BasicClass RazorDisplayNDT in Model.TypeDamageRelations.NoDamageTo)
+        {
+            
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayNDT.Url)>
+                               @RazorDisplayNDT.Name.Substring(0,1).ToUpper()@RazorDisplayNDT.Name.Substring(1 , @RazorDisplayNDT.Name.Length - 1)
+
+                                </a>
+                  
+        }
+        </div>
+                        </td>
+        
+                         <td id="tableTypeCol" >
+                        <div class="hover-warper">
+                          <p class="Type_relation"> No damage from </p>
+                          @foreach(BasicClass RazorDisplayNDF in Model.TypeDamageRelations.NoDamageFr)
+        {
+           
+                                <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrltoId(@RazorDisplayNDF.Url)>
+                                @RazorDisplayNDF.Name.Substring(0,1).ToUpper()@RazorDisplayNDF.Name.Substring(1 , @RazorDisplayNDF.Name.Length - 1)
+
+                                </a>
+                              
+        }
+        </div>
+                        </td>
+                        
+              }
+        </tr>
+  
+</table>
+
+<br /><br />
+ <table class="ListTable">
+     
+          @for(int i=0; i < Model.TypePokemonList.Count; i+= 6)
+          {
+            <tr>
+               @for (var j = 0; j < 6 && i + j < Model.TypePokemonList.Count; j++)
+                {
+                     <td>
+                        <div class="PokeCard" id="IndexCard">
+                            <a asp-page="Details" asp-route-Id=@Model.TypePokemonList[i+j].TypePokemonID>  
+                            <img src=@Model.TypePokemonList[i+j].ImgUrl width="100" height="100" />
+                            <p class="PokeName"> @Model.TypePokemonList[i+j].Name.Substring(0,1).ToUpper()@Model.TypePokemonList[i+j].Name.Substring(1,@Model.TypePokemonList[i+j].Name.Length - 1) </P>
+                                <br>
+                              <p class="PokeId" >#@Model.TypePokemonList[i+j].TypePokemonID</p>
+                            </a>
+                        </div>
+                     </td>
+                }
+            </tr>   
+          }
+      
+            
+    </table>
+    <script src="~/js/pokemonTypeScript.js"></script>
+
+

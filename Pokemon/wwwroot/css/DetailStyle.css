@@ -1,0 +1,85 @@
+﻿img{
+    margin:auto;
+    
+    
+}
+
+.BackPic {
+    height:350px;
+    margin: auto;
+    text-align: center;
+    background: radial-gradient(circle at 50% 10%, #EE8130 36%, #ffffff 36%);
+}
+
+.BackDetailPic {
+    height: 200px;
+    width:80%;
+    margin: auto;
+    text-align: center;
+    background: radial-gradient(circle at 50% 10%, #EE8130 36%, #ffffff 36%);
+}
+
+table {
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+.TypeRelationsTable table{
+    border: 2px solid #000;
+}
+
+
+.PokeDetailCard{
+    margin:auto;
+    border-radius:50px;
+    
+}
+
+#detailCard {
+    
+}
+
+
+.PokeDetailPage {
+    margin: auto;
+    width:70%;
+    border-radius: 50px;
+    border:1px #000 solid;
+}
+
+#typeButton {
+    border: 2px solid #000;
+}
+
+th {
+    border: 2px solid #000;
+}
+
+
+#tableTypeCol {
+    border: 2px solid #000;
+}
+
+.btn{
+    width:200px;
+    text-align:center;
+    margin:auto;
+}
+
+.TypeButtonsDetail{
+    margin:auto;
+    text-align:center;
+}
+
+a{
+    text-decoration:none;
+    color:#000000;
+}
+
+.PokeCard {
+    border: 2px solid #000;
+    text-align: center;
+    border-radius: 20px;
+    background: radial-gradient(circle at 50% 0%, #EE8130 36%, #ffff 36%); /*linear-gradient(to right, #d8e80b , white);*/
+    width: 150px;
+}

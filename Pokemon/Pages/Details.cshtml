@@ -1,0 +1,155 @@
+﻿@page
+@using Pokemon.Models
+@model Pokemon.Pages.DetailsModel
+
+
+<link rel="stylesheet" href="~/css/DetailStyle.css" />
+@{
+
+    
+   // Check = Model.CurrentPokemon.Evolution.PokemonsList;
+
+    <div class="PokeDetailPage" id="detailCard">
+                 
+            <div class="BackDetailPic">
+              <img id="PokeImg" src=@Model.CurrentPokemon.ImageUrl height="180" width="180" > 
+            </div>
+               
+            <h2 class="text-center">
+               @Model.CurrentPokemon.Name.Substring(0,1).ToUpper()@Model.CurrentPokemon.Name.Substring(1, @Model.CurrentPokemon.Name.Length - 1)
+             </h2> 
+                 <br/>
+                <table>
+                  @for(int i = 0; i < Model.CurrentPokemon.BaseStat.Count; i+=3)
+          {
+                        <tr>
+                         @for(int j = 0; j < 3; j++)
+             {
+                             <td>
+                             
+                             <h4>@Model.CurrentPokemon.BaseStat[i+j].stat.Name.ToUpper()</h4><br>
+                             <h5>@Model.CurrentPokemon.BaseStat[i+j].base_stat</h5>
+                             
+                             </td>
+                 
+             }
+                        </tr>
+
+          
+          }
+
+                </table>
+
+                <br/><br/>
+
+            @{
+            var temp = Model.CurrentPokemon.Type;
+            if(temp.Count >= 2)
+            {
+
+                int LastSlash = temp[1].PokeType.URL.LastIndexOf('/');
+                int SecondLastSlash = temp[1].PokeType.URL.TrimEnd('/').LastIndexOf('/');
+                string IdOutput =temp[1].PokeType.URL.Substring(SecondLastSlash + 1, (LastSlash - SecondLastSlash) - 1);
+                temp[1].PokeType.Id = Int32.Parse(IdOutput);
+
+            }
+            }
+             @foreach(PokemonType Type in temp)
+        {
+                <div class="TypeButtonsDetail">
+                  <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@Type.PokeType.Id.ToString()>
+                @Type.PokeType.Name.Substring(0,1).ToUpper()@Type.PokeType.Name.Substring(1,@Type.PokeType.Name.Length - 1)
+               </a>
+                </div>
+         
+           
+        }
+
+            @if (Model.CurrentPokemon.Evolution.PokemonsList != null)
+        {
+          
+                int UrlToId(string Url)
+                {
+
+                    int LastSlash = Url.LastIndexOf('/');
+                    int SecondLastSlash = Url.TrimEnd('/').LastIndexOf('/');
+                    string IdOutput = Url.Substring(SecondLastSlash + 1, (LastSlash - SecondLastSlash) - 1);
+                    var UrlId = Int32.Parse(IdOutput);
+                    return UrlId;
+                }
+
+
+                var Pokemolistlength = Model.CurrentPokemon.Evolution.PokemonsList.Count;
+                var pokemonsArray = Model.CurrentPokemon.Evolution.PokemonsList;
+                if(Pokemolistlength > 3)
+                {
+                         <table>
+                          @for(int i = 0; i < Pokemolistlength; i+=3)
+                          {
+                                 <tr>
+                                   @for(int j = 0; j < 3; j++)
+                                   {
+                                        <td>
+                                         <a asp-page="Details" asp-route-Id=@pokemonsArray[i+j].Id>
+                                        <img src=@pokemonsArray[i+j].ImageUrl width="120" height="120" />
+                                        <p> @pokemonsArray[i+j].Name.Substring(0,1).ToUpper()@pokemonsArray[i+j].Name.Substring(1 , @pokemonsArray[i+j].Name.Length -1)
+                                          <p> #@pokemonsArray[i+j].Id.ToString() </p> 
+                                        </p>
+                                    
+                                        @foreach (PokemonType EvoType in pokemonsArray[i+j].Type)
+                                         {
+
+                                            <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrlToId(EvoType.PokeType.URL)>
+                                                @EvoType.PokeType.Name.Substring(0,1).ToUpper()@EvoType.PokeType.Name.Substring(1,@EvoType.PokeType.Name.Length - 1)
+                                            </a>
+                                         }
+                                         </a>
+                             
+                                        </td>
+                 
+                                   }
+                                 </tr>
+
+          
+                          }
+
+                    </table>
+            }
+            else
+            {
+                     <table>
+                        <tr>
+
+                            @foreach (PokemonClass Evo in Model.CurrentPokemon.Evolution.PokemonsList)
+                        {
+                                <td>
+
+                                    <a asp-page="Details" asp-route-Id=@Evo.Id>
+                                        <img src=@Evo.ImageUrl width="120" height="120" />
+                                        <p> @Evo.Name.Substring(0,1).ToUpper()@Evo.Name.Substring(1 , @Evo.Name.Length -1) </p>
+                                          <p> #@Evo.Id.ToString() </p> 
+                                        @foreach (PokemonType EvoType in Evo.Type)
+                                    {
+
+                                            <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@UrlToId(EvoType.PokeType.URL)>
+                                                @EvoType.PokeType.Name.Substring(0,1).ToUpper()@EvoType.PokeType.Name.Substring(1,@EvoType.PokeType.Name.Length - 1)
+                                            </a>
+                                    }
+                                    </a>
+
+                                </td>
+                        }
+
+                        </tr>
+
+                    </table>
+            }
+            
+               
+            }       
+    </div>
+   
+
+}
+
+ <script src="~/js/detailJS.js"></script>

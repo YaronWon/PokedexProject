@@ -1,0 +1,53 @@
+﻿.Type_relation{
+    display:none;
+}
+
+
+
+@media (max-width:650px) {
+    table {
+        width: 100%;
+    }
+
+    th {
+        display: block;
+    }
+
+    td {
+        display: block;
+    }
+
+
+    .ListTable td {
+        width: 50%;
+        height: 50%;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+
+
+
+    .TypeRelationsTable {
+        border-collapse: collapse;
+    }
+
+        .TypeRelationsTable tr {
+            padding: 6px;
+        }
+
+        .TypeRelationsTable th {
+            display: none;
+        }
+
+    .Type_relation {
+        display: block;
+        font-weight: bold;
+        font-size: 15px;
+        background-color: white
+    }
+
+    .PokeCard {
+        display: grid;
+    }
+}

@@ -1,0 +1,35 @@
+﻿@page
+@model Pokemon.Pages.PokemonByRegionModel
+@{
+}
+
+<link href="~/css/ListStyle.css" rel="stylesheet" />
+<link href="~/css/DetailStyle.css" rel="stylesheet"/>
+
+<h1>
+    @Model.RegionName.Substring(0,1).ToUpper()@Model.RegionName.Substring(1,@Model.RegionName.Length - 1) 
+</h1>
+
+<table class="ListTable">
+     
+          @for(int i=0; i < Model.RegionPokemonList.Count; i+= 6)
+          {
+            <tr>
+               @for (var j = 0; j < 6 && i + j <  Model.RegionPokemonList.Count; j++)
+                {
+                     <td>
+                        <div class="PokeCard" id="IndexCard">
+                            <a asp-page="Details" asp-route-Id=@Model.RegionPokemonList[i+j].TypePokemonID>  
+                            <img src=@Model.RegionPokemonList[i+j].ImgUrl width="100" height="100" />
+                            <p class="PokeName"> @Model.RegionPokemonList[i+j].Name.Substring(0,1).ToUpper()@Model.RegionPokemonList[i+j].Name.Substring(1,@Model.RegionPokemonList[i+j].Name.Length - 1) </P>
+                                <br>
+                              <p class="PokeId" >#@Model.RegionPokemonList[i+j].TypePokemonID</p>
+                            </a>
+                        </div>
+                     </td>
+                }
+            </tr>   
+          }
+      
+            
+    </table>

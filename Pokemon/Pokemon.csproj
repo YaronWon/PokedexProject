@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\Style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\TypeImages\1.png" />
+    <None Include="wwwroot\Images\TypeImages\10.png" />
+    <None Include="wwwroot\Images\TypeImages\11.png" />
+    <None Include="wwwroot\Images\TypeImages\12.png" />
+    <None Include="wwwroot\Images\TypeImages\13.png" />
+    <None Include="wwwroot\Images\TypeImages\14.png" />
+    <None Include="wwwroot\Images\TypeImages\15.png" />
+    <None Include="wwwroot\Images\TypeImages\16.png" />
+    <None Include="wwwroot\Images\TypeImages\17.png" />
+    <None Include="wwwroot\Images\TypeImages\18.png" />
+    <None Include="wwwroot\Images\TypeImages\2.png" />
+    <None Include="wwwroot\Images\TypeImages\3.png" />
+    <None Include="wwwroot\Images\TypeImages\4.png" />
+    <None Include="wwwroot\Images\TypeImages\5.png" />
+    <None Include="wwwroot\Images\TypeImages\6.png" />
+    <None Include="wwwroot\Images\TypeImages\7.png" />
+    <None Include="wwwroot\Images\TypeImages\8.png" />
+    <None Include="wwwroot\Images\TypeImages\9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.29">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

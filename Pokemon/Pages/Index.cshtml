@@ -1,0 +1,142 @@
+﻿@page
+@model Pokemon.Pages.IndexModel
+@using Pokemon.Models
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@*
+ /*
+           /*
+         https://pokeapi.co/api/v2/pokedex/id/
+         Kanto - 2
+         original-johto - 3
+         hoenn - 4
+       
+        extended-sinnoh - 6 
+        updated-johto - 7
+
+         */
+
+*@
+
+<link href="~/css/IndexPage.css" rel="stylesheet"/>
+<div class="text-center">
+     <h1 class="display-4 text-center">Welcome</h1>
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <h2 class="text-center">Pokemons By Region</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="2" >
+                <img src="~/Images/IndexImages/KantoStart.png"  />
+                <p>Kanto Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="3" >
+                <img src="~/Images/IndexImages/JohtoStart.jpg" />
+                <p>Jhoto Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="4" >
+                <img src="~/Images/IndexImages/HoennStart.jpg" />
+                <p>Hoenn Region</p>
+                </a>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="5" >
+                <img src="~/Images/IndexImages/SinnohStart.jpg"  />
+                <p>Sinnoh Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="8" >
+                <img src="~/Images/IndexImages/UnovaStart.png"  />
+                <p>Unova Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="Pokemon"  >
+                <img src="~/Images/IndexImages/PokeDex.png" />
+                <p>MainPokedex</p>
+                </a>
+            </td>
+        </tr>
+
+          
+      
+          <tr>
+            <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="17" >
+                <img src="~/Images/IndexImages/AlolaStart.png"  />
+                <p>Alola Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="27" >
+                <img src="~/Images/IndexImages/GalarStart.jpg"  />
+                <p>Galar Region</p>
+                </a>
+            </td>
+              <td>
+                <a class="btn" id="typeButton" asp-page="PokemonByRegion" asp-route-RegionID="12" >
+                <img src="~/Images/IndexImages/KalosStart.jpg"/>
+                <p>Kalos Region</p>
+                </a>
+            </td>
+        </tr>
+        
+        
+        
+        <tr>
+            <td colspan="3">
+                 <h2 class="text-center">Pokemons By Type</h2>
+            </td>
+        </tr>
+
+        @*
+               <td>
+                 <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id="1"  >
+                <img src="~/Images/TypeImages/1.png" class="TypeImage" />
+                <p>Normal Type</p>
+                </a>
+            </td>
+        *@
+        
+        @for(int i = 0; i < Model.TypeArr.Count; i+= 3)
+        {
+                <tr>
+                @for(int j = 0; j < 3 && i+j < Model.TypeArr.Count; j++ )
+                {
+                  <td>
+
+                    <a class="btn" id="typeButton" asp-page="PokemonByType" asp-route-id=@Model.TypeArr[i+j].TypePokemonID  >
+                    <img src=@Url.Content(@Model.TypeArr[i+j].ImgUrl) class="TypeImage" />
+                    <p>@Model.TypeArr[i+j].Name.Substring(0,1).ToUpper()@Model.TypeArr[i+j].Name.Substring(1,@Model.TypeArr[i+j].Name.Length -1 )</p>
+                    </a>
+                        
+                  </td>
+                    
+                }
+
+                </tr>
+        }
+        
+        
+
+    </table>
+
+   
+  
+
+
+    
+</div>
